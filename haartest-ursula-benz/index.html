@@ -144,21 +144,22 @@ var EMAIL = "info@schoenheitsoase-benz.ch";
 var PHONE_SHOW = "+41 79 412 47 17";
 var PHONE_TEL = "+41794124717";
 var WHATSAPP = "https://wa.me/41794124717";
-var BASE = "https://mymonat.com/enrollments/16024692-";
+var BASE = "https://mymonat.com/enrollments/16627484-";
 function cartLink(id){ return BASE + id + "/share?utm_source=website&utm_medium=link&utm_campaign=pre_package_cart"; }
-function mpLink(id){ return BASE + id + "/share?utm_source=website&utm_medium=link&utm_campaign=pre_package_cart_mp"; }
+/* Ohne eigenen Link (null) führt der Button zu Ursulas Shop */
 var LINKS = {
-  gloss:        cartLink("1793725556"),
-  feuchtigkeit: cartLink("1793725556"),
-  erweitert:    cartLink("1793725657"),
-  haarausfall:  cartLink("1793725704"),
-  kopfhaut:     cartLink("1793726203"),
-  locken:       cartLink("1793725964"),
-  trocken_dick: cartLink("1793726335"),
-  trocken_duenn:cartLink("1793726427"),
-  maenner:      cartLink("1793726487"),
-  partner:      mpLink("1793726556"),
-  klein:        mpLink("1793726637")
+  gloss:        cartLink("1793729539"),
+  feuchtigkeit: cartLink("1793729613"),
+  erweitert:    cartLink("1793729741"),
+  kopfhaut:     cartLink("1793729838"),
+  trocken_duenn:cartLink("1793730054"),
+  volumen:      cartLink("1793730175"),
+  locken:       cartLink("1793730276"),
+  maenner:      cartLink("1793730326"),
+  haarausfall:  null,
+  trocken_dick: null,
+  partner:      null,
+  klein:        null
 };
 /* =========================== */
 
@@ -181,7 +182,7 @@ function chk(){ return '<svg viewBox="0 0 24 24" aria-hidden="true">'+ICONS.chec
 var Q = [
   {icon:"user", img:"hero.jpg", q:"Für wen machst du den Test?", o:["Für mich, ich bin eine Frau","Für mich, ich bin ein Mann"]},
   {icon:"sparkle", q:"Was beschäftigt dich bei deinem Haar am meisten?", o:[
-    "Haarausfall oder dünner werdendes Haar","Juckende, trockene oder gereizte Kopfhaut","Locken und Frizz","Trockene Längen, Spitzen und Spliss","Mehr Feuchtigkeit und Pflege im Alltag","Glanz und ein gepflegter Look"]},
+    "Haarausfall oder dünner werdendes Haar","Juckende, trockene oder gereizte Kopfhaut","Locken und Frizz","Trockene Längen, Spitzen und Spliss","Mehr Feuchtigkeit und Pflege im Alltag","Glanz und ein gepflegter Look","Mehr Volumen und Fülle"]},
   {icon:"lines", q:"Wie würdest du dein Haar von der Dicke her beschreiben?", o:["Fein oder dünn","Mittel","Dick und kräftig"]},
   {icon:"wave", q:"Welche Struktur hat dein Haar?", o:["Glatt","Wellig","Lockig","Sehr lockig oder kraus"]},
   {icon:"drop", q:"Wie fühlt sich deine Kopfhaut an?", o:["Angenehm und ausgeglichen","Manchmal etwas trocken","Sie juckt oder spannt oft","Schüppchen, Produktreste oder starkes Jucken"]},
@@ -191,16 +192,17 @@ var Q = [
 
 var R = {
   feuchtigkeit:{key:"feuchtigkeit", title:"Dein Haar sehnt sich nach Feuchtigkeit", text:"Mittleres bis dickes Haar wird schnell trocken, wenn ihm Pflege fehlt. Die Renew™ Linie mit REJUVENIQE® versorgt trockenes Haar mit Antioxidantien und feuchtigkeitsspendenden Formeln.", imgs:["renew.jpg"], lines:["Renew™ Shampoo und Pflege","REJUVENIQE® und Erbsen-Extrakt","Gemacht für mittleres bis dickes Haar"]},
-  erweitert:{key:"erweitert", title:"Dein feines Haar braucht erweiterte Feuchtigkeit", text:"Feineres Haar braucht Feuchtigkeit, ohne beschwert zu werden. Die Linie Erweiterte Feuchtigkeit ist genau dafür gedacht: sie pflegt dünneres Haar intensiv und leicht.", imgs:["kollektion.jpg"], lines:["Erweiterte Feuchtigkeit für dünneres Haar","Shampoo, Conditioner und Masque","Intensive Pflege, die dein Haar nicht beschwert"]},
+  erweitert:{key:"erweitert", title:"Dein feines Haar braucht erweiterte Feuchtigkeit", text:"Feineres Haar braucht Feuchtigkeit, ohne beschwert zu werden. Die Linie Erweiterte Feuchtigkeit ist genau dafür gedacht: sie pflegt dünneres Haar intensiv und leicht.", imgs:["erweitert.jpg"], lines:["Erweiterte Feuchtigkeit für dünneres Haar","Shampoo, Conditioner und Masque","Intensive Pflege, die dein Haar nicht beschwert"]},
   haarausfall:{key:"haarausfall", title:"Dein Haar wünscht sich Stärkung", text:"Wenn das Haar dünner wirkt, lohnt sich ein Blick auf die Kopfhaut. IR Clinical™ ist die Pflege für dünner werdendes Haar und kümmert sich um die Kopfhaut als Basis.", imgs:["irclinical.jpg"], lines:["IR Clinical™ Hair Thinning Defense","Pflege direkt an der Kopfhaut","Regelmässige Anwendung ist der Schlüssel"], doctor:true},
   kopfhaut:{key:"kopfhaut", title:"Deine Kopfhaut wünscht sich Ruhe", text:"Eine gesunde Kopfhaut ist die Basis für schönes Haar. Scalp Comfort™ reinigt sanft, ohne die Feuchtigkeitsbarriere und das Mikrobiom der Kopfhaut zu stören, und das Peeling entfernt Ablagerungen und Produktreste.", imgs:["scalp-comfort.jpg","scrub.jpg"], lines:["Scalp Comfort™ Ausgleichende Kopfhautbehandlung","Scalp Purifying Scrub, 2-in-1 Peeling und Shampoo","Für eine ausgeglichene Kopfhaut"], skin:true},
   locken:{key:"locken", title:"Deine Locken wollen tanzen", text:"Locken brauchen Feuchtigkeit und Definition. Die Curl Perfection™ Linie versorgt Locken mit Feuchtigkeit, minimiert Frizz und definiert alle Lockenmuster für langanhaltende Geschmeidigkeit.", imgs:["curl.jpg"], lines:["Lockendefinierende Creme gegen Frizz","Hydrate & Hold Gelée","Refresh Spray für zwischendurch"]},
   trocken_dick:{key:"trocken_dick", title:"Deine Längen und Spitzen brauchen Pflege", text:"Dickeres, trockenes Haar liebt reichhaltige Pflege. Mit Renew™ bekommt es Feuchtigkeit, und REJUVABEADS™ kümmern sich um die Spitzen. Das Öl REJUVENIQE® pflegt Haar und Haut.", imgs:["rejuvabeads.jpg","oil.jpg"], lines:["Renew™ für mittleres bis dickes Haar","REJUVABEADS™ Split End Mender für die Spitzen","REJUVENIQE® Oil, das Kronjuwel der Pflege"]},
   trocken_duenn:{key:"trocken_duenn", title:"Dein feines Haar mag es leicht und gepflegt", text:"Feines, trockenes Haar braucht Pflege, die nicht beschwert. Erweiterte Feuchtigkeit versorgt es leicht, REJUVABEADS™ kümmern sich um die Spitzen, und das Öl REJUVENIQE® rundet die Pflege ab.", imgs:["rejuvabeads.jpg","oil.jpg"], lines:["Erweiterte Feuchtigkeit für dünneres Haar","REJUVABEADS™ Split End Mender für die Spitzen","REJUVENIQE® Oil für Haar und Haut"]},
   maenner:{key:"maenner", title:"Starkes Haar beginnt hier", text:"Auch Männer dürfen sich um ihr Haar kümmern. Das Männerset kombiniert Pflege für Haar und Kopfhaut mit MONAT BLACK und IR Clinical™. Praktisch, klar und ohne Schnickschnack.", imgs:["mann.jpg","irclinical.jpg"], lines:["MONAT BLACK™ für Männerhaar","IR Clinical™ für die Kopfhaut","Ein Set, das zu deinem Alltag passt"], doctor:true},
-  gloss:{key:"gloss", title:"Dein Haar will glänzen", text:"Glanz entsteht durch gepflegtes, glattes Haar. Die MONAT Gloss Serie ist für Haar gemacht, das strahlen soll, mit dem Look, den man sieht.", imgs:["hero.jpg"], lines:["MONAT Gloss Serie","Für einen gepflegten, glänzenden Look","Dein Set, passend zusammengestellt"], solo:true}
+  volumen:{key:"volumen", title:"Dein Haar wünscht sich mehr Volumen", text:"Mehr Fülle und Schwung entstehen durch leichte Pflege, die dein Haar nicht beschwert. Dein Set ist auf Haar abgestimmt, das mehr Volumen bekommen soll.", imgs:["hero.jpg"], lines:["Pflege für mehr Fülle und Schwung","Leicht, damit dein Haar nicht beschwert wird","Dein Set, passend zusammengestellt"], solo:true},
+  gloss:{key:"gloss", title:"Dein Haar will glänzen", text:"Glanz entsteht durch gepflegtes, glattes Haar. Die MONAT Gloss Serie ist für Haar gemacht, das strahlen soll, mit dem Look, den man sieht.", imgs:["kollektion.jpg"], lines:["MONAT Gloss Serie","Für einen gepflegten, glänzenden Look","Dein Set, passend zusammengestellt"], solo:true}
 };
-var NAMES = {feuchtigkeit:"Feuchtigkeit", erweitert:"Erweiterte Feuchtigkeit", haarausfall:"Stärkung für dünner werdendes Haar", kopfhaut:"Kopfhautpflege", locken:"Locken", trocken_dick:"Trockene Längen und Spitzen", trocken_duenn:"Trockene Längen und Spitzen, feines Haar", maenner:"Männerset", gloss:"Gloss Serie"};
+var NAMES = {feuchtigkeit:"Feuchtigkeit", erweitert:"Erweiterte Feuchtigkeit", haarausfall:"Stärkung für dünner werdendes Haar", kopfhaut:"Kopfhautpflege", locken:"Locken", trocken_dick:"Trockene Längen und Spitzen", trocken_duenn:"Trockene Längen und Spitzen, feines Haar", maenner:"Männerset", gloss:"Gloss Serie", volumen:"Mehr Volumen"};
 
 var A = [];
 var view = "start";
@@ -264,7 +266,7 @@ function renderQuestion(i){
 
 function compute(){
   if(A[0] === 1){ return {main:"maenner", extra:null, doctor:true}; }
-  var focusKeys = ["haarausfall","kopfhaut","locken","trocken","feuchtigkeit","gloss"];
+  var focusKeys = ["haarausfall","kopfhaut","locken","trocken","feuchtigkeit","gloss","volumen"];
   var fine = (A[2] === 0);
   var main = focusKeys[A[1]];
   if(main === "trocken"){ main = fine ? "trocken_duenn" : "trocken_dick"; }
@@ -311,12 +313,12 @@ function showResult(){
   if(c.doctor || res.doctor){ html += '<p class="note">Bei starkem, plötzlichem oder anhaltendem Haarausfall lass die Ursache bitte zusätzlich ärztlich abklären.</p>'; }
   if(res.skin){ html += '<p class="note">Bei starkem Juckreiz, Rötungen oder Schuppen, die nicht besser werden, hole bitte zusätzlich ärztlichen Rat.</p>'; }
   html += '<p class="small" style="margin-top:14px">Die genaue Zusammenstellung deines Sets besprichst du persönlich mit '+PARTNER+'.</p>' +
-    ext(LINKS[res.key], "Mein Set ansehen und bestellen", "btn") .replace('class="btn"','class="btn" style="margin-top:18px"') + '</div>';
+    ext(LINKS[res.key] || SHOP_LINK, LINKS[res.key] ? "Mein Set ansehen und bestellen" : "Zu Ursulas Shop", "btn") .replace('class="btn"','class="btn" style="margin-top:18px"') + '</div>';
 
   if(c.extra && R[c.extra]){
     var ex = R[c.extra];
     html += '<h2 class="sec grad rise">Auch interessant für dich</h2>' +
-      '<div class="glass mini rise"><img src="'+IMG+ex.imgs[0]+'" alt="'+NAMES[c.extra]+'"><div><h3>'+NAMES[c.extra]+'</h3><p class="small" style="margin:6px 0 10px">Deine Antworten zeigen, dass dieser Bereich dich ebenfalls beschäftigt.</p>'+ext(LINKS[ex.key], "Zum Set", "btn").replace('class="btn"','class="btn" style="padding:12px 16px;font-size:15px;animation:none"')+'</div></div>';
+      '<div class="glass mini rise"><img src="'+IMG+ex.imgs[0]+'" alt="'+NAMES[c.extra]+'"><div><h3>'+NAMES[c.extra]+'</h3><p class="small" style="margin:6px 0 10px">Deine Antworten zeigen, dass dieser Bereich dich ebenfalls beschäftigt.</p>'+ext(LINKS[ex.key] || SHOP_LINK, LINKS[ex.key] ? "Zum Set" : "Zum Shop", "btn").replace('class="btn"','class="btn" style="padding:12px 16px;font-size:15px;animation:none"')+'</div></div>';
   }
 
   html += '<div class="contact rise"><h3>Persönlich für dich da</h3>' +
@@ -325,9 +327,9 @@ function showResult(){
     '<p>Telefon: <a href="tel:'+PHONE_TEL+'">'+PHONE_SHOW+'</a><br>E-Mail: <a href="mailto:'+EMAIL+'">'+EMAIL+'</a></p>' +
     ext(WHATSAPP, "Per WhatsApp schreiben", "btn wa") + ext(SHOP_LINK, "Zu meinem MONAT Shop", "btn ghost").replace('class="btn ghost"','class="btn ghost" style="margin-top:10px"') + '</div>';
 
-  html += '<div class="glass partner rise"><h3>Du möchtest mehr als Kundin sein?</h3>' +
+  if(LINKS.partner && LINKS.klein){ html += '<div class="glass partner rise"><h3>Du möchtest mehr als Kundin sein?</h3>' +
     '<p style="margin-top:8px">Werde Teil des Teams und verdiene mit etwas, das du liebst.</p>' +
-    '<div class="stack">'+ext(LINKS.partner, "Market Partner werden", "btn")+ext(LINKS.klein, "Kleines Paket ansehen", "btn ghost")+'</div></div>';
+    '<div class="stack">'+ext(LINKS.partner, "Market Partner werden", "btn")+ext(LINKS.klein, "Kleines Paket ansehen", "btn ghost")+'</div></div>'; }
 
   html += '<div class="stack" style="margin-top:24px"><button class="btn ghost" id="again" type="button">Test noch einmal machen</button></div>' +
     '<p class="small" style="margin-top:20px">Dieser Test ist eine Selbsteinschätzung und dient der allgemeinen Information. Er ersetzt keine ärztliche Diagnose oder Behandlung.</p>';
