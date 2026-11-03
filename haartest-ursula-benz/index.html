@@ -387,9 +387,11 @@ function showResult(){
     '<p>Telefon: <a href="tel:'+PHONE_TEL+'">'+PHONE_SHOW+'</a><br>E-Mail: <a href="mailto:'+EMAIL+'">'+EMAIL+'</a></p>' +
     ext(WHATSAPP, "Per WhatsApp schreiben", "btn wa") + ext(SHOP_LINK, "Zu meinem MONAT Shop", "btn ghost").replace('class="btn ghost"','class="btn ghost" style="margin-top:10px"') + '</div>';
 
-  if(LINKS.partner && LINKS.klein){ html += '<div class="glass partner rise"><h3>Du möchtest mehr als Kundin sein?</h3>' +
-    '<p style="margin-top:8px">Werde Teil des Teams und verdiene mit etwas, das du liebst.</p>' +
-    '<div class="stack">'+ext(LINKS.partner, "Market Partner werden", "btn")+ext(LINKS.klein, "Kleines Paket ansehen", "btn ghost")+'</div></div>'; }
+  if(LINKS.partner && LINKS.klein){ html += '<div class="glass partner rise"><h3>Als Market Partner starten und profitieren</h3>' +
+    '<p style="margin-top:8px">Werde Teil des Teams und nutze die Vorteile eines Market Partners. Wähle dein Startpaket:</p>' +
+    '<div class="stack">'+ext(LINKS.partner, "Market Partner werden", "btn")+ext(LINKS.klein, "Kleines Paket ansehen", "btn ghost")+'</div>' +
+    '<p class="small" style="margin-top:16px"><b>Du kommst aus einem anderen Land?</b> Dann melde dich bei mir über WhatsApp.</p>' +
+    ext(WHATSAPP, "Per WhatsApp melden", "btn wa").replace('class="btn wa"','class="btn wa" style="margin-top:10px"') + '</div>'; }
 
   html += '<div class="stack" style="margin-top:24px"><button class="btn ghost" id="again" type="button">Test noch einmal machen</button></div>' +
     '<p class="small" style="margin-top:20px">Dieser Test ist eine Selbsteinschätzung und dient der allgemeinen Information. Er ersetzt keine ärztliche Diagnose oder Behandlung.</p>';
