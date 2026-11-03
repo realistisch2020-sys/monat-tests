@@ -122,6 +122,11 @@ p{margin:0}
 .partner{margin-top:28px;padding:24px 20px}
 .partner .stack{margin-top:16px}
 .facts{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+
+.vip{margin:0 0 18px;padding:16px 16px 14px;border-radius:18px;border:2px solid transparent;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(120deg,var(--violet),var(--rose),var(--navy)) border-box}
+.vip .tag{display:inline-block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#fff;background:linear-gradient(100deg,var(--violet),#D4806A);padding:5px 11px;border-radius:99px;margin-bottom:10px}
+.vip h3{font-size:18px;margin-bottom:6px}
+.vip .why{margin-top:10px}
 [hidden]{display:none!important}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -307,13 +312,22 @@ function showResult(){
     '<h1 class="grad rise" style="--d:.08s" tabindex="-1" id="focus">'+res.title+'</h1>' +
     '<p class="lead rise" style="--d:.14s">'+res.text+'</p>' +
     resultCard(res, true) +
-    '<div class="glass card rise" style="margin-top:18px;--d:.3s"><h3>Das ist in deinem Set gedacht</h3><ul class="why">';
+    '<div class="glass card rise" style="margin-top:18px;--d:.3s">' +
+    '<div class="vip"><span class="tag">So bestellst du</span><h3>Dein Set als VIP bestellen</h3>' +
+    '<p>Eine VIP-Bestellung ist deine Bestellung als Kundin mit Vorteilen. Du registrierst dich einmal und bestellst danach, wann du möchtest.</p>' +
+    '<ul class="why">' +
+    '<li>'+chk()+'<span><b>20% Rabatt</b> auf deine Bestellung</span></li>' +
+    '<li>'+chk()+'<span><b>Keine Verpflichtung:</b> kein Abo, du bestellst nur, wenn du willst</span></li>' +
+    '<li>'+chk()+'<span><b>FlexShip, wenn du magst:</b> eine Erinnerung an deine Lieblingsprodukte, 7 Tage vorher. Es wird nichts automatisch verschickt, und du kannst jederzeit ändern, pausieren oder kündigen</span></li>' +
+    '<li>'+chk()+'<span><b>Treuepunkte</b> sammeln und exklusive Aktionen nutzen</span></li>' +
+    '</ul></div>' +
+    '<h3>Das ist in deinem Set gedacht</h3><ul class="why">';
   res.lines.forEach(function(l){ html += '<li>'+chk()+'<span>'+l+'</span></li>'; });
   html += '</ul>';
   if(c.doctor || res.doctor){ html += '<p class="note">Bei starkem, plötzlichem oder anhaltendem Haarausfall lass die Ursache bitte zusätzlich ärztlich abklären.</p>'; }
   if(res.skin){ html += '<p class="note">Bei starkem Juckreiz, Rötungen oder Schuppen, die nicht besser werden, hole bitte zusätzlich ärztlichen Rat.</p>'; }
   html += '<p class="small" style="margin-top:14px">Die genaue Zusammenstellung deines Sets besprichst du persönlich mit '+PARTNER+'.</p>' +
-    ext(LINKS[res.key] || SHOP_LINK, LINKS[res.key] ? "Mein Set ansehen und bestellen" : "Zu Ursulas Shop", "btn") .replace('class="btn"','class="btn" style="margin-top:18px"') + '</div>';
+    ext(LINKS[res.key] || SHOP_LINK, LINKS[res.key] ? "Als VIP bestellen" : "Zu Ursulas Shop", "btn") .replace('class="btn"','class="btn" style="margin-top:18px"') + '</div>';
 
   if(c.extra && R[c.extra]){
     var ex = R[c.extra];
