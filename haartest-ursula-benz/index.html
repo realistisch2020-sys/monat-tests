@@ -197,8 +197,7 @@ var LINKS = {
   volumen:      cartLink("1793730175"),
   locken:       cartLink("1793730276"),
   maenner:      cartLink("1793730326"),
-  haarausfall:  null,
-  trocken_dick: null,
+  haarausfall:  cartLink("1793733964"),
   partner:      mpLink("1793731400"),
   klein:        mpLink("1793731445")
 };
@@ -237,13 +236,12 @@ var R = {
   haarausfall:{key:"haarausfall", title:"Dein Haar wünscht sich Stärkung", text:"Wenn das Haar dünner wirkt, lohnt sich ein Blick auf die Kopfhaut. IR Clinical™ ist die Pflege für dünner werdendes Haar und kümmert sich um die Kopfhaut als Basis.", imgs:["irclinical.jpg"], lines:["IR Clinical™ Hair Thinning Defense","Pflege direkt an der Kopfhaut","Regelmässige Anwendung ist der Schlüssel"], doctor:true},
   kopfhaut:{key:"kopfhaut", title:"Deine Kopfhaut wünscht sich Ruhe", text:"Eine gesunde Kopfhaut ist die Basis für schönes Haar. Scalp Comfort™ reinigt sanft, ohne die Feuchtigkeitsbarriere und das Mikrobiom der Kopfhaut zu stören, und das Peeling entfernt Ablagerungen und Produktreste.", imgs:["scalp-comfort.jpg","scrub.jpg"], lines:["Scalp Comfort™ Ausgleichende Kopfhautbehandlung","Scalp Purifying Scrub, 2-in-1 Peeling und Shampoo","Für eine ausgeglichene Kopfhaut"], skin:true},
   locken:{key:"locken", title:"Deine Locken wollen tanzen", text:"Locken brauchen Feuchtigkeit und Definition. Die Curl Perfection™ Linie versorgt Locken mit Feuchtigkeit, minimiert Frizz und definiert alle Lockenmuster für langanhaltende Geschmeidigkeit.", imgs:["curl.jpg"], lines:["Lockendefinierende Creme gegen Frizz","Hydrate & Hold Gelée","Refresh Spray für zwischendurch"]},
-  trocken_dick:{key:"trocken_dick", title:"Deine Längen und Spitzen brauchen Pflege", text:"Dickeres, trockenes Haar liebt reichhaltige Pflege. Mit Renew™ bekommt es Feuchtigkeit, und REJUVABEADS™ kümmern sich um die Spitzen. Das Öl REJUVENIQE® pflegt Haar und Haut.", imgs:["rejuvabeads.jpg","oil.jpg"], lines:["Renew™ für mittleres bis dickes Haar","REJUVABEADS™ Split End Mender für die Spitzen","REJUVENIQE® Oil, das Kronjuwel der Pflege"]},
   trocken_duenn:{key:"trocken_duenn", title:"Dein feines Haar mag es leicht und gepflegt", text:"Feines, trockenes Haar braucht Pflege, die nicht beschwert. Erweiterte Feuchtigkeit versorgt es leicht, REJUVABEADS™ kümmern sich um die Spitzen, und das Öl REJUVENIQE® rundet die Pflege ab.", imgs:["rejuvabeads.jpg","oil.jpg"], lines:["Erweiterte Feuchtigkeit für dünneres Haar","REJUVABEADS™ Split End Mender für die Spitzen","REJUVENIQE® Oil für Haar und Haut"]},
   maenner:{key:"maenner", title:"Starkes Haar beginnt hier", text:"Auch Männer dürfen sich um ihr Haar kümmern. Das Männerset kombiniert Pflege für Haar und Kopfhaut mit MONAT BLACK und IR Clinical™. Praktisch, klar und ohne Schnickschnack.", imgs:["mann.jpg","irclinical.jpg"], lines:["MONAT BLACK™ für Männerhaar","IR Clinical™ für die Kopfhaut","Ein Set, das zu deinem Alltag passt"], doctor:true},
   volumen:{key:"volumen", title:"Dein Haar wünscht sich mehr Volumen", text:"Mehr Fülle und Schwung entstehen durch leichte Pflege, die dein Haar nicht beschwert. Dein Set ist auf Haar abgestimmt, das mehr Volumen bekommen soll.", imgs:["hero.jpg"], lines:["Pflege für mehr Fülle und Schwung","Leicht, damit dein Haar nicht beschwert wird","Dein Set, passend zusammengestellt"], solo:true},
   gloss:{key:"gloss", title:"Dein Haar will glänzen", text:"Glanz entsteht durch gepflegtes, glattes Haar. Die MONAT Gloss Serie ist für Haar gemacht, das strahlen soll, mit dem Look, den man sieht.", imgs:["gloss.jpg"], lines:["MONAT Gloss Serie","Für einen gepflegten, glänzenden Look","Dein Set, passend zusammengestellt"], solo:true}
 };
-var NAMES = {feuchtigkeit:"Feuchtigkeit", erweitert:"Erweiterte Feuchtigkeit", haarausfall:"Stärkung für dünner werdendes Haar", kopfhaut:"Kopfhautpflege", locken:"Locken", trocken_dick:"Trockene Längen und Spitzen", trocken_duenn:"Trockene Längen und Spitzen, feines Haar", maenner:"Männerset", gloss:"Gloss Serie", volumen:"Mehr Volumen"};
+var NAMES = {feuchtigkeit:"Feuchtigkeit", erweitert:"Erweiterte Feuchtigkeit", haarausfall:"Stärkung für dünner werdendes Haar", kopfhaut:"Kopfhautpflege", locken:"Locken", trocken_duenn:"Trockene Längen und Spitzen, feines Haar", maenner:"Männerset", gloss:"Gloss Serie", volumen:"Mehr Volumen"};
 
 var A = [];
 var view = "start";
@@ -309,7 +307,7 @@ function compute(){
   var focusKeys = ["haarausfall","kopfhaut","locken","trocken","feuchtigkeit","gloss","volumen"];
   var fine = (A[2] === 0);
   var main = focusKeys[A[1]];
-  if(main === "trocken"){ main = fine ? "trocken_duenn" : "trocken_dick"; }
+  if(main === "trocken"){ main = fine ? "trocken_duenn" : "feuchtigkeit"; }
   if(main === "feuchtigkeit"){ main = fine ? "erweitert" : "feuchtigkeit"; }
   var sc = {haarausfall:(A[5]||0), kopfhaut:(A[4]||0), trocken:(A[6]||0), locken:((A[3]||0) >= 2 ? (A[3]||0) : 0)};
   var mainBase = main.indexOf("trocken") === 0 ? "trocken" : main;
@@ -317,7 +315,7 @@ function compute(){
   ["haarausfall","kopfhaut","trocken","locken"].forEach(function(k){
     if(k !== mainBase && sc[k] > bv){ best = k; bv = sc[k]; }
   });
-  if(best === "trocken"){ best = fine ? "trocken_duenn" : "trocken_dick"; }
+  if(best === "trocken"){ best = fine ? "trocken_duenn" : "feuchtigkeit"; }
   return {main:main, extra:best, doctor:(A[5] >= 2)};
 }
 
