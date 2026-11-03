@@ -375,12 +375,6 @@ function showResult(){
   html += '</ul>';
   html += setButtons(res.key, res.title) + '</div>';
 
-  if(c.extra && R[c.extra]){
-    var ex = R[c.extra];
-    html += '<h2 class="sec grad rise">Auch interessant für dich</h2>' +
-      '<div class="glass mini rise"><img src="'+IMG+ex.imgs[0]+'" alt="'+NAMES[c.extra]+'"><div><h3>'+NAMES[c.extra]+'</h3><p class="small" style="margin:6px 0 10px">Deine Antworten zeigen, dass dieser Bereich dich ebenfalls beschäftigt.</p>'+(LINKS[ex.key] ? ext(LINKS[ex.key], "Zum Set", "btn") : ext(waAsk(NAMES[c.extra]), "Set anfragen", "btn")).replace('class="btn"','class="btn" style="padding:12px 16px;font-size:15px;animation:none"')+'</div></div>';
-  }
-
   html += '<div class="contact rise"><h3>Persönlich für dich da</h3>' +
     '<p>Du hast Fragen oder möchtest dein Set persönlich zusammenstellen? Ich berate dich gern.</p>' +
     '<p style="margin-top:12px"><b>'+PARTNER+'</b><br>MONAT Market Partner · '+STUDIO+'</p>' +
