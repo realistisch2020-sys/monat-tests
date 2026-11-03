@@ -241,7 +241,7 @@ var R = {
   trocken_duenn:{key:"trocken_duenn", title:"Dein feines Haar mag es leicht und gepflegt", text:"Feines, trockenes Haar braucht Pflege, die nicht beschwert. Erweiterte Feuchtigkeit versorgt es leicht, REJUVABEADS™ kümmern sich um die Spitzen, und das Öl REJUVENIQE® rundet die Pflege ab.", imgs:["rejuvabeads.jpg","oil.jpg"], lines:["Erweiterte Feuchtigkeit für dünneres Haar","REJUVABEADS™ Split End Mender für die Spitzen","REJUVENIQE® Oil für Haar und Haut"]},
   maenner:{key:"maenner", title:"Starkes Haar beginnt hier", text:"Auch Männer dürfen sich um ihr Haar kümmern. Das Männerset kombiniert Pflege für Haar und Kopfhaut mit MONAT BLACK und IR Clinical™. Praktisch, klar und ohne Schnickschnack.", imgs:["mann.jpg","irclinical.jpg"], lines:["MONAT BLACK™ für Männerhaar","IR Clinical™ für die Kopfhaut","Ein Set, das zu deinem Alltag passt"], doctor:true},
   volumen:{key:"volumen", title:"Dein Haar wünscht sich mehr Volumen", text:"Mehr Fülle und Schwung entstehen durch leichte Pflege, die dein Haar nicht beschwert. Dein Set ist auf Haar abgestimmt, das mehr Volumen bekommen soll.", imgs:["hero.jpg"], lines:["Pflege für mehr Fülle und Schwung","Leicht, damit dein Haar nicht beschwert wird","Dein Set, passend zusammengestellt"], solo:true},
-  gloss:{key:"gloss", title:"Dein Haar will glänzen", text:"Glanz entsteht durch gepflegtes, glattes Haar. Die MONAT Gloss Serie ist für Haar gemacht, das strahlen soll, mit dem Look, den man sieht.", imgs:["kollektion.jpg"], lines:["MONAT Gloss Serie","Für einen gepflegten, glänzenden Look","Dein Set, passend zusammengestellt"], solo:true}
+  gloss:{key:"gloss", title:"Dein Haar will glänzen", text:"Glanz entsteht durch gepflegtes, glattes Haar. Die MONAT Gloss Serie ist für Haar gemacht, das strahlen soll, mit dem Look, den man sieht.", imgs:["gloss.jpg"], lines:["MONAT Gloss Serie","Für einen gepflegten, glänzenden Look","Dein Set, passend zusammengestellt"], solo:true}
 };
 var NAMES = {feuchtigkeit:"Feuchtigkeit", erweitert:"Erweiterte Feuchtigkeit", haarausfall:"Stärkung für dünner werdendes Haar", kopfhaut:"Kopfhautpflege", locken:"Locken", trocken_dick:"Trockene Längen und Spitzen", trocken_duenn:"Trockene Längen und Spitzen, feines Haar", maenner:"Männerset", gloss:"Gloss Serie", volumen:"Mehr Volumen"};
 
@@ -268,7 +268,6 @@ function renderStart(){
     '<h1 class="grad rise" style="--d:.1s" tabindex="-1" id="focus">Was braucht dein Haar wirklich?</h1>' +
     '<p class="lead rise" style="--d:.2s">Beantworte ein paar kurze Fragen und erhalte dein persönliches MONAT Set, passend zu deinem Haar und deiner Kopfhaut.</p>' +
     '<div class="strip rise" style="--d:.3s" aria-hidden="true"><div class="track">'+strip+'</div></div>' +
-    '<div class="chips rise" style="--d:.35s"><span>Für Frauen und Männer</span><span>Persönliche Empfehlung</span><span>Direkt bestellbar</span><span>Mit Musik</span></div>' +
     '<div class="stack rise" style="margin-top:26px;--d:.4s"><button class="btn" id="go" type="button">Test starten</button></div>' +
     '<p class="small rise" style="margin-top:18px;--d:.5s">Dieser Test ist eine persönliche Selbsteinschätzung und ersetzt keine ärztliche oder fachliche Beratung.</p>';
   document.getElementById("go").onclick = function(){ musicAutostart(); A = []; renderQuestion(0); };
@@ -374,10 +373,7 @@ function showResult(){
     '<h3>Das ist in deinem Set gedacht</h3><ul class="why">';
   res.lines.forEach(function(l){ html += '<li>'+chk()+'<span>'+l+'</span></li>'; });
   html += '</ul>';
-  if(c.doctor || res.doctor){ html += '<p class="note">Bei starkem, plötzlichem oder anhaltendem Haarausfall lass die Ursache bitte zusätzlich ärztlich abklären.</p>'; }
-  if(res.skin){ html += '<p class="note">Bei starkem Juckreiz, Rötungen oder Schuppen, die nicht besser werden, hole bitte zusätzlich ärztlichen Rat.</p>'; }
-  html += '<p class="small" style="margin-top:14px">Die genaue Zusammenstellung deines Sets besprichst du persönlich mit '+PARTNER+'.</p>' +
-    setButtons(res.key, res.title) + '</div>';
+  html += setButtons(res.key, res.title) + '</div>';
 
   if(c.extra && R[c.extra]){
     var ex = R[c.extra];
