@@ -322,6 +322,20 @@ function compute(){
   return {main:main, extra:best, doctor:(A[5] >= 2)};
 }
 
+
+function waAsk(name){
+  return WHATSAPP + "?text=" + encodeURIComponent("Hallo Ursula, ich habe den Haar-Typ-Test gemacht. Mein Ergebnis: " + name + ". Ich möchte mein Set bestellen.");
+}
+function setButtons(key, name){
+  var m = ' style="margin-top:18px"', g = ' style="margin-top:10px;animation:none"';
+  if(LINKS[key]){
+    return ext(LINKS[key], "Als VIP bestellen", "btn").replace('class="btn"','class="btn"'+m) +
+           ext(SHOP_LINK, "Zu Ursulas Shop", "btn ghost").replace('class="btn ghost"','class="btn ghost"'+g);
+  }
+  return ext(waAsk(name), "Mein Set bei Ursula anfragen", "btn").replace('class="btn"','class="btn"'+m) +
+         ext(SHOP_LINK, "Zu Ursulas Shop", "btn ghost").replace('class="btn ghost"','class="btn ghost"'+g);
+}
+
 function renderLoading(){
   view = "loading"; saveState();
   if(timer){ clearTimeout(timer); }
@@ -363,12 +377,12 @@ function showResult(){
   if(c.doctor || res.doctor){ html += '<p class="note">Bei starkem, plötzlichem oder anhaltendem Haarausfall lass die Ursache bitte zusätzlich ärztlich abklären.</p>'; }
   if(res.skin){ html += '<p class="note">Bei starkem Juckreiz, Rötungen oder Schuppen, die nicht besser werden, hole bitte zusätzlich ärztlichen Rat.</p>'; }
   html += '<p class="small" style="margin-top:14px">Die genaue Zusammenstellung deines Sets besprichst du persönlich mit '+PARTNER+'.</p>' +
-    ext(LINKS[res.key] || SHOP_LINK, LINKS[res.key] ? "Als VIP bestellen" : "Zu Ursulas Shop", "btn") .replace('class="btn"','class="btn" style="margin-top:18px"') + '</div>';
+    setButtons(res.key, res.title) + '</div>';
 
   if(c.extra && R[c.extra]){
     var ex = R[c.extra];
     html += '<h2 class="sec grad rise">Auch interessant für dich</h2>' +
-      '<div class="glass mini rise"><img src="'+IMG+ex.imgs[0]+'" alt="'+NAMES[c.extra]+'"><div><h3>'+NAMES[c.extra]+'</h3><p class="small" style="margin:6px 0 10px">Deine Antworten zeigen, dass dieser Bereich dich ebenfalls beschäftigt.</p>'+ext(LINKS[ex.key] || SHOP_LINK, LINKS[ex.key] ? "Zum Set" : "Zum Shop", "btn").replace('class="btn"','class="btn" style="padding:12px 16px;font-size:15px;animation:none"')+'</div></div>';
+      '<div class="glass mini rise"><img src="'+IMG+ex.imgs[0]+'" alt="'+NAMES[c.extra]+'"><div><h3>'+NAMES[c.extra]+'</h3><p class="small" style="margin:6px 0 10px">Deine Antworten zeigen, dass dieser Bereich dich ebenfalls beschäftigt.</p>'+(LINKS[ex.key] ? ext(LINKS[ex.key], "Zum Set", "btn") : ext(waAsk(NAMES[c.extra]), "Set anfragen", "btn")).replace('class="btn"','class="btn" style="padding:12px 16px;font-size:15px;animation:none"')+'</div></div>';
   }
 
   html += '<div class="contact rise"><h3>Persönlich für dich da</h3>' +
