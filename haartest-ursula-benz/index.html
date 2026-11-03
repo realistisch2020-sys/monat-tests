@@ -27,7 +27,7 @@ body{background:linear-gradient(170deg,#F7F4FD 0%,#EEE8F8 55%,#FBEFEA 100%) fixe
 .b2{width:300px;height:300px;background:#F6CDBA;top:42%;left:-130px;animation:drift 28s ease-in-out -9s infinite reverse}
 .b3{width:320px;height:320px;background:#B9C4F0;bottom:-120px;right:5%;opacity:.4;animation:drift 32s ease-in-out -15s infinite}
 .wrap{position:relative;max-width:560px;margin:0 auto;padding:24px 20px 56px}
-.brand{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--violet);margin:0 0 20px;font-weight:700}
+.brand{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--violet);margin:0 0 20px;font-weight:700;padding-right:56px;min-height:34px}
 h1,h2,h3{margin:0;color:var(--navy);text-wrap:balance;line-height:1.16;font-family:var(--font)}
 h1{font-size:36px;font-weight:700;letter-spacing:-.015em}
 h2{font-size:25px;font-weight:700}
@@ -127,6 +127,35 @@ p{margin:0}
 .vip .tag{display:inline-block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#fff;background:linear-gradient(100deg,var(--violet),#D4806A);padding:5px 11px;border-radius:99px;margin-bottom:10px}
 .vip h3{font-size:18px;margin-bottom:6px}
 .vip .why{margin-top:10px}
+
+/* Musik-Knopf */
+.musicbtn{position:fixed;top:14px;right:14px;z-index:20;width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.9);background:rgba(255,255,255,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 8px 22px rgba(27,34,80,.18);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--navy);padding:0}
+.musicbtn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.musicbtn .eq{display:none;align-items:flex-end;gap:3px;height:20px}
+.musicbtn .eq i{display:block;width:3px;border-radius:2px;background:var(--violet);height:100%;transform-origin:bottom;transform:scaleY(.3)}
+.musicbtn.on svg{display:none}
+.musicbtn.on .eq{display:flex}
+.musicbtn.on .eq i{animation:eq 1s ease-in-out infinite}
+.musicbtn.on .eq i:nth-child(2){animation-delay:-.3s}.musicbtn.on .eq i:nth-child(3){animation-delay:-.6s}.musicbtn.on .eq i:nth-child(4){animation-delay:-.15s}
+.musicbtn.hint::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--violet);animation:ripple 1.8s ease-out infinite}
+@keyframes eq{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(1)}}
+@keyframes ripple{from{transform:scale(1);opacity:.6}to{transform:scale(1.5);opacity:0}}
+/* Funkelstaub */
+#dust{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+/* Klick-Welle */
+.btn,.opt{position:relative;overflow:hidden}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.55);transform:scale(0);animation:rip .7s ease-out forwards;pointer-events:none}
+.opt .ripple{background:rgba(107,79,163,.25)}
+@keyframes rip{to{transform:scale(3.2);opacity:0}}
+/* Glanz im Titel */
+.grad{background-size:220% 100%;animation:gradmove 7s ease-in-out infinite alternate}
+@keyframes gradmove{from{background-position:0 0}to{background-position:100% 0}}
+/* Funken-Explosion beim Ergebnis */
+.burst{position:fixed;left:50%;top:30%;width:0;height:0;z-index:30;pointer-events:none}
+.burst i{position:absolute;left:0;top:0;width:10px;height:10px;margin:-5px;background:var(--c,#E7A98F);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);animation:bst 1.5s cubic-bezier(.15,.7,.3,1) forwards;animation-delay:var(--dl,0s);opacity:0}
+@keyframes bst{0%{opacity:1;transform:translate(0,0) scale(.4) rotate(0)}80%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.3) rotate(220deg)}}
+.showcase::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-120%);animation:glint 5.5s ease-in-out 1s infinite;pointer-events:none}
+@keyframes glint{0%,60%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
 [hidden]{display:none!important}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -138,6 +167,12 @@ p{margin:0}
 <div class="blob b1" aria-hidden="true"></div>
 <div class="blob b2" aria-hidden="true"></div>
 <div class="blob b3" aria-hidden="true"></div>
+<canvas id="dust" aria-hidden="true"></canvas>
+<audio id="bgm" src="musik.mp3" loop preload="none"></audio>
+<button class="musicbtn hint" id="music" type="button" aria-pressed="false" aria-label="Musik an oder aus">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l11-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg>
+  <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+</button>
 <main class="wrap" id="app"></main>
 
 <script>
@@ -150,6 +185,7 @@ var PHONE_SHOW = "+41 79 412 47 17";
 var PHONE_TEL = "+41794124717";
 var WHATSAPP = "https://wa.me/41794124717";
 var BASE = "https://mymonat.com/enrollments/16627484-";
+function mpLink(id){ return BASE + id + "/share?utm_source=website&utm_medium=link&utm_campaign=pre_package_cart_mp"; }
 function cartLink(id){ return BASE + id + "/share?utm_source=website&utm_medium=link&utm_campaign=pre_package_cart"; }
 /* Ohne eigenen Link (null) führt der Button zu Ursulas Shop */
 var LINKS = {
@@ -163,8 +199,8 @@ var LINKS = {
   maenner:      cartLink("1793730326"),
   haarausfall:  null,
   trocken_dick: null,
-  partner:      null,
-  klein:        null
+  partner:      mpLink("1793731400"),
+  klein:        mpLink("1793731445")
 };
 /* =========================== */
 
@@ -228,14 +264,14 @@ function renderStart(){
   var strip = "";
   for(var r=0;r<2;r++){ names.forEach(function(n){ strip += '<img src="'+IMG+n+'.jpg" alt="" loading="lazy">'; }); }
   app.innerHTML = brand() +
-    '<div class="hero rise"><img src="'+IMG+'hero.jpg" alt="Gepflegtes, glänzendes Haar"><div class="tag">Dein persönlicher Haar-Typ-Test<span>7 Fragen · etwa 2 Minuten</span></div></div>' +
+    '<div class="hero rise"><img src="'+IMG+'hero.jpg" alt="Gepflegtes, glänzendes Haar"><div class="tag">Dein persönlicher Haar-Typ-Test<span>7 Fragen · etwa 2 Minuten · mit Musik</span></div></div>' +
     '<h1 class="grad rise" style="--d:.1s" tabindex="-1" id="focus">Was braucht dein Haar wirklich?</h1>' +
     '<p class="lead rise" style="--d:.2s">Beantworte ein paar kurze Fragen und erhalte dein persönliches MONAT Set, passend zu deinem Haar und deiner Kopfhaut.</p>' +
     '<div class="strip rise" style="--d:.3s" aria-hidden="true"><div class="track">'+strip+'</div></div>' +
-    '<div class="chips rise" style="--d:.35s"><span>Für Frauen und Männer</span><span>Persönliche Empfehlung</span><span>Direkt bestellbar</span></div>' +
+    '<div class="chips rise" style="--d:.35s"><span>Für Frauen und Männer</span><span>Persönliche Empfehlung</span><span>Direkt bestellbar</span><span>Mit Musik</span></div>' +
     '<div class="stack rise" style="margin-top:26px;--d:.4s"><button class="btn" id="go" type="button">Test starten</button></div>' +
     '<p class="small rise" style="margin-top:18px;--d:.5s">Dieser Test ist eine persönliche Selbsteinschätzung und ersetzt keine ärztliche oder fachliche Beratung.</p>';
-  document.getElementById("go").onclick = function(){ A = []; renderQuestion(0); };
+  document.getElementById("go").onclick = function(){ musicAutostart(); A = []; renderQuestion(0); };
   focusTop();
 }
 
@@ -291,7 +327,7 @@ function renderLoading(){
   if(timer){ clearTimeout(timer); }
   app.innerHTML = brand() + '<div class="glass loading rise"><div class="big"><i></i><b></b></div><h2 tabindex="-1" id="focus">Dein Haar-Profil wird erstellt</h2><p class="small" style="margin-top:8px">Einen Moment, wir stellen dein Set zusammen.</p></div>';
   focusTop();
-  timer = setTimeout(showResult, 1800);
+  timer = setTimeout(function(){ showResult(); burst(); }, 1800);
 }
 
 function resultCard(res, isMain){
@@ -351,6 +387,93 @@ function showResult(){
   app.innerHTML = html;
   document.getElementById("again").onclick = renderStart;
   focusTop();
+}
+
+
+/* ====== Musik ====== */
+var bgm = document.getElementById("bgm"), mbtn = document.getElementById("music");
+var MUSIK_KEY = "haartest_benz_musik";
+var fadeT = null;
+function fadeTo(v, ms){
+  if(fadeT){ clearInterval(fadeT); }
+  var start = bgm.volume, steps = 20, n = 0;
+  fadeT = setInterval(function(){
+    n++; bgm.volume = Math.max(0, Math.min(1, start + (v-start)*(n/steps)));
+    if(n >= steps){ clearInterval(fadeT); fadeT = null; if(v === 0){ bgm.pause(); } }
+  }, ms/steps);
+}
+function musicSync(){
+  var on = !bgm.paused;
+  mbtn.classList.toggle("on", on);
+  mbtn.classList.toggle("hint", !on && !musicChosen());
+  mbtn.setAttribute("aria-pressed", on ? "true" : "false");
+  mbtn.setAttribute("aria-label", on ? "Musik ausschalten" : "Musik einschalten");
+}
+function musicChosen(){ try{ return !!localStorage.getItem(MUSIK_KEY); }catch(e){ return false; } }
+function musicPlay(){
+  bgm.volume = 0;
+  var pr = bgm.play();
+  if(pr && pr.then){ pr.then(function(){ fadeTo(0.35, 1800); musicSync(); }, function(){ musicSync(); }); }
+  else { fadeTo(0.35, 1800); }
+  try{ localStorage.setItem(MUSIK_KEY, "an"); }catch(e){}
+}
+function musicStop(){
+  fadeTo(0, 600);
+  try{ localStorage.setItem(MUSIK_KEY, "aus"); }catch(e){}
+  setTimeout(musicSync, 700);
+}
+mbtn.onclick = function(){ if(bgm.paused){ musicPlay(); } else { musicStop(); } };
+bgm.addEventListener("play", musicSync); bgm.addEventListener("pause", musicSync);
+document.addEventListener("visibilitychange", function(){ if(document.hidden && !bgm.paused){ bgm.pause(); } else if(!document.hidden){ try{ if(localStorage.getItem(MUSIK_KEY) === "an" && bgm.paused && started){ bgm.play().catch(function(){}); } }catch(e){} } });
+var started = false;
+function musicAutostart(){
+  started = true;
+  var pref = null; try{ pref = localStorage.getItem(MUSIK_KEY); }catch(e){}
+  if(pref !== "aus" && bgm.paused){ musicPlay(); }
+}
+
+/* ====== Funkelstaub ====== */
+(function(){
+  var cv = document.getElementById("dust"); if(!cv || !cv.getContext) return;
+  if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var ctx = cv.getContext("2d"), W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2), P = [], cols = ["231,169,143","255,255,255","160,140,215","214,128,106"];
+  function size(){ W = window.innerWidth; H = window.innerHeight; cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+  function mk(init){ return {x:Math.random()*W, y:init ? Math.random()*H : H+10, r:Math.random()*2.2+.6, v:Math.random()*.35+.12, d:Math.random()*Math.PI*2, c:cols[Math.floor(Math.random()*cols.length)], t:Math.random()*Math.PI*2}; }
+  size(); for(var i=0;i<34;i++){ P.push(mk(true)); }
+  window.addEventListener("resize", size);
+  function tick(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<P.length;i++){
+      var p = P[i]; p.y -= p.v; p.d += .01; p.x += Math.sin(p.d)*.25; p.t += .03;
+      var a = .25 + .45*Math.abs(Math.sin(p.t));
+      ctx.beginPath(); ctx.fillStyle = "rgba("+p.c+","+a.toFixed(2)+")"; ctx.arc(p.x,p.y,p.r,0,6.283); ctx.fill();
+      if(p.y < -10){ P[i] = mk(false); }
+    }
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+/* ====== Klick-Welle ====== */
+document.addEventListener("pointerdown", function(e){
+  var el = e.target.closest ? e.target.closest(".btn, .opt") : null; if(!el) return;
+  var r = el.getBoundingClientRect(), d = Math.max(r.width, r.height), sp = document.createElement("span");
+  sp.className = "ripple"; sp.style.width = sp.style.height = d + "px";
+  sp.style.left = (e.clientX - r.left - d/2) + "px"; sp.style.top = (e.clientY - r.top - d/2) + "px";
+  el.appendChild(sp); setTimeout(function(){ if(sp.parentNode){ sp.parentNode.removeChild(sp); } }, 750);
+});
+
+/* ====== Funken beim Ergebnis ====== */
+function burst(){
+  if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var box = document.createElement("div"); box.className = "burst"; box.setAttribute("aria-hidden","true");
+  var cols = ["#E7A98F","#6B4FA3","#FFFFFF","#D4806A","#B9A8E6","#F4D9A8"], html = "";
+  for(var i=0;i<34;i++){
+    var ang = Math.random()*6.283, dist = 90 + Math.random()*170;
+    html += '<i style="--x:'+Math.round(Math.cos(ang)*dist)+'px;--y:'+Math.round(Math.sin(ang)*dist+60)+'px;--c:'+cols[i%cols.length]+';--dl:'+(Math.random()*.25).toFixed(2)+'s;width:'+(7+Math.round(Math.random()*9))+'px;height:'+(7+Math.round(Math.random()*9))+'px"></i>';
+  }
+  box.innerHTML = html; document.body.appendChild(box);
+  setTimeout(function(){ if(box.parentNode){ box.parentNode.removeChild(box); } }, 2200);
 }
 
 function focusTop(){
