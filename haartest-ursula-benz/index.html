@@ -115,6 +115,10 @@ h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:28px;line-heig
 .music-toggle.on .eq i{animation:eq 1s ease-in-out infinite}
 .music-toggle.on .eq i:nth-child(2){animation-delay:-.3s}.music-toggle.on .eq i:nth-child(3){animation-delay:-.6s}.music-toggle.on .eq i:nth-child(4){animation-delay:-.15s}
 @keyframes eq{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(1)}}
+
+.start-btn{background:linear-gradient(100deg,#9C6F35,var(--gold) 45%,#D3A765 70%,#9C6F35);background-size:220% 100%;color:#fff;font-size:18px;font-weight:600;padding:19px 20px;border-radius:14px;box-shadow:0 10px 26px -8px rgba(180,134,75,.75);animation:pulsegold 2.6s ease-in-out infinite,shimmer 4s linear infinite}
+.start-btn:hover{background:linear-gradient(100deg,#9C6F35,var(--gold) 45%,#D3A765 70%,#9C6F35);background-size:220% 100%}
+@keyframes pulsegold{0%,100%{box-shadow:0 10px 26px -8px rgba(180,134,75,.7),0 0 0 0 rgba(180,134,75,.45)}50%{box-shadow:0 12px 32px -8px rgba(180,134,75,.9),0 0 0 9px rgba(180,134,75,0)}}
 @media (max-width:480px){body{padding:16px}.top,.body,.progress-wrap{padding-left:22px;padding-right:22px}h1{font-size:24px}.question{font-size:19px}.result-title{font-size:23px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
@@ -211,9 +215,10 @@ function renderStart(){
   A = []; view = "start"; saveState();
   app.innerHTML = head("Welcher Haar-Typ bist du?", "Ein paar ehrliche Fragen zu Haar und Kopfhaut, und das Set, das wirklich zu dir passt.") +
     '<div class="body"><div class="screen">' +
+    '<button class="start-btn" id="go" type="button">Jetzt Test starten &rarr;</button>' +
+    '<p class="small" style="margin:10px 0 22px">Nur 7 Fragen, etwa 2 Minuten</p>' +
     '<div class="intro-info"><strong>MONAT</strong> ist eine internationale Marke für hochwertige, natürlich basierte Haarpflege, vegan und ohne Tierversuche entwickelt, mit REJUVENIQE®, einer Mischung aus über 13 Pflanzenölen. Dein Test dauert etwa 2 Minuten, mit Musik.</div>' +
     '<div class="intro-gallery"><img src="'+IMG+'hero.jpg" alt="Gepflegtes Haar"><img src="'+IMG+'curl.jpg" alt="Locken-Pflege"><img src="'+IMG+'renew.jpg" alt="Renew Pflege"></div>' +
-    '<button class="start-btn" id="go" type="button">Test starten</button>' +
     '<p class="small">Dieser Test ist eine persönliche Selbsteinschätzung und ersetzt keine ärztliche oder fachliche Beratung.</p>' +
     '</div></div>';
   document.getElementById("go").onclick = function(){ musicAutostart(); A = []; renderQuestion(0); };
