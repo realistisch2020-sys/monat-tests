@@ -371,6 +371,18 @@ a.step:hover,a.prod:hover{background:rgba(168,156,148,.1)}
   .fgrid{max-width:1180px;margin-left:auto;margin-right:auto}
 }
 @media(prefers-reduced-motion:reduce){.fade{opacity:1;transform:none;filter:none;transition:none}html{scroll-behavior:auto}.hero .pic{animation:none}}
+
+.rec{background:var(--white);padding:70px var(--pad) 90px}
+.rec .vcard{position:relative;display:block;aspect-ratio:4/3;background:linear-gradient(rgba(31,30,29,.18),rgba(31,30,29,.35)),url(img/p2.jpg) 50% 25%/cover;box-shadow:0 14px 40px rgba(0,0,0,.18)}
+.rec .play{position:absolute;inset:0;margin:auto;width:74px;height:74px;border:2px solid #fff;border-radius:50%;display:grid;place-items:center}
+.rec .play::after{content:"";border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:6px}
+.rec .vcap{display:flex;justify-content:space-between;gap:16px;margin:16px 0 44px;font-family:var(--head);font-size:15px}
+.rec h2{font-size:clamp(30px,5vw,56px);margin-bottom:12px}
+.rec .rsub{margin-bottom:8px;opacity:.85}
+.rec .adv{padding:56px 0 20px;background:transparent;max-width:none;margin:0}
+.rec .nform{margin:30px 0 26px}
+.rec small{display:block;margin-top:18px;opacity:.7}
+@media(min-width:900px){.rec{padding-left:max(var(--pad),calc((100vw - 1180px)/2 + var(--pad)));padding-right:max(var(--pad),calc((100vw - 1180px)/2 + var(--pad)));display:grid;grid-template-columns:1fr 1fr;gap:0 70px;align-items:start}.rec .adv{grid-column:1/-1}}
 </style>
 </head>
 <body>
@@ -501,6 +513,7 @@ a.step:hover,a.prod:hover{background:rgba(168,156,148,.1)}
     <a class="prod fade" href="https://swiss.mymonat.com" target="_blank" rel="noopener"><span>(02)</span><div><em>IR Clinical™</em><h3>Verdickende Spülung</h3><p>Pflegt die Haarlängen und erleichtert das Entwirren.</p></div><svg class="arr"><use href="#arrow"/></svg></a>
     <a class="prod fade" href="https://swiss.mymonat.com" target="_blank" rel="noopener"><span>(03)</span><div><em>IR Clinical™</em><h3>Kopfhautserum</h3><p>Leichte Pflege für die Kopfhaut.</p></div><svg class="arr"><use href="#arrow"/></svg></a>
   </div>
+  <p class="fade" style="margin:0 0 26px;font-size:16px;opacity:.85">Als VIP bestellst du mit Vorteilen und Flexship: Das ist kein klassisches Abo. Du kannst deine nächste Bestellung verschieben, pausieren, anpassen oder stornieren. Wichtig ist nur, dass Flexship beim Kauf aktiviert ist, damit deine VIP-Vorteile gesichert sind.</p>
   <div class="btnrow fade">
     <a class="btn" href="https://swiss.mymonat.com/shop/checkout/select_customer_for_registration" target="_blank" rel="noopener">Jetzt VIP werden <svg class="arr"><use href="#arrow"/></svg></a>
     <a class="link" href="https://swiss.mymonat.com" target="_blank" rel="noopener"><u>Starte deine IR Clinical™ Reise</u> <svg class="arr"><use href="#arrow"/></svg></a>
@@ -539,6 +552,7 @@ a.step:hover,a.prod:hover{background:rgba(168,156,148,.1)}
 <!-- PAKET -->
 <section class="paket" id="pakete">
   <h2 class="fade">Starte dein Business mit dem Dream Big Schweiz Paket</h2>
+  <p class="fade" style="margin-bottom:22px;opacity:.85">Baue ein Business, das du wirklich liebst.</p>
   <div class="price fade">Dein Einstieg für CHF 700.–</div>
   <p class="big fade">Das grosse Paket gibt dir die volle Produktauswahl, echte eigene Erfahrung und den besten Start in dein Business.</p>
   <a class="btn fade" href="https://mymonat.com/enrollments/16024648-1789969092/share?utm_source=website&amp;utm_medium=link&amp;utm_campaign=pre_package_cart_mp" target="_blank" rel="noopener">Jetzt Dream Big sichern <svg class="arr"><use href="#arrow"/></svg></a>
@@ -585,6 +599,36 @@ a.step:hover,a.prod:hover{background:rgba(168,156,148,.1)}
         <li class="fade"><a href="#pakete"><svg class="arr"><use href="#arrow"/></svg><div><h3>Klare Zahlen, ehrliche Infos</h3><p>Alle Kosten siehst du vorher: CHF 700.– oder CHF 260.– zum Start, danach CHF 55.– jährlich.</p></div></a></li>
       </ul>
     </div>
+  </div>
+</section>
+
+<!-- AUFZEICHNUNG -->
+<section class="rec" id="aufzeichnung">
+  <div>
+    <a class="vcard fade" href="#afo" aria-label="Aufzeichnung freischalten"><span class="play"></span></a>
+    <div class="vcap fade"><span>Business-Info mit Petra</span><span>Aufzeichnung</span></div>
+  </div>
+  <div>
+    <h2 class="fade">Business-Aufzeichnung kostenfrei ansehen</h2>
+    <p class="rsub fade">Trag dich ein, ich schicke dir das Passwort persönlich.</p>
+    <form class="nform fade" id="afo" autocomplete="on" novalidate>
+      <input type="text" data-f="v" placeholder="Vorname" aria-label="Vorname" autocomplete="given-name">
+      <input type="text" data-f="n" placeholder="Name" aria-label="Name" autocomplete="family-name">
+      <input type="email" data-f="e" placeholder="E-Mail" aria-label="E-Mail" autocomplete="email">
+      <div class="ferr" role="alert" aria-live="polite"></div>
+    </form>
+    <a class="btn fade" href="#" id="asend">Jetzt Aufzeichnung freischalten <svg class="arr"><use href="#arrow"/></svg></a>
+    <small class="fade">Kein Spam. Jederzeit abmeldbar.</small>
+  </div>
+  <div class="adv">
+    <div class="vlabel">Du bekommst in der Aufzeichnung</div>
+    <ul>
+      <li class="fade"><a href="#story"><svg class="arr"><use href="#arrow"/></svg><div><h3>Meine Story</h3><p>Warum ich nach 26 Jahren Praxis GLOW &amp; GROW aufgebaut habe.</p></div></a></li>
+      <li class="fade"><a href="#pakete"><svg class="arr"><use href="#arrow"/></svg><div><h3>Das Modell transparent erklärt</h3><p>Alle Kosten vorab, ohne Schönfärberei.</p></div></a></li>
+      <li class="fade"><a href="https://swiss.mymonat.com" target="_blank" rel="noopener"><svg class="arr"><use href="#arrow"/></svg><div><h3>Was hinter MONAT steckt</h3><p>Die Produkte und die Möglichkeiten, die sie dir eröffnen.</p></div></a></li>
+      <li class="fade"><a href="#pakete"><svg class="arr"><use href="#arrow"/></svg><div><h3>Kleines Paket oder Dream Big</h3><p>Beide Einstiege erklärt, damit du weisst, was zu dir passt.</p></div></a></li>
+      <li class="fade"><a href="#ratgeber"><svg class="arr"><use href="#arrow"/></svg><div><h3>Dein kostenloser Kopfhaut-Ratgeber</h3><p>Als Bonus, weil Kopfhautpflege der Anfang von allem ist.</p></div></a></li>
+    </ul>
   </div>
 </section>
 
@@ -638,7 +682,8 @@ a.step:hover,a.prod:hover{background:rgba(168,156,148,.1)}
 <!-- READY -->
 <section class="ready">
   <h2 class="fade">Ready to start?<br>„Dream Big“ now</h2>
-  <p class="fade">Du brauchst vorher kein Gespräch und willst direkt durchstarten? Dann starte in wenigen Minuten dein eigenes Business.</p>
+  <p class="fade" style="font-weight:600;margin-bottom:14px">Direkter Zugang zu deinem Business.</p>
+  <p class="fade">Ohne Warteliste, ohne Info-Gespräch: Wenn du direkt starten willst, startest du in wenigen Minuten dein eigenes Business. Fragen beantworte ich dir jederzeit persönlich.</p>
   <div class="ready-actions">
     <a class="btn fade" href="https://mymonat.com/enrollments/16024648-1789969092/share?utm_source=website&amp;utm_medium=link&amp;utm_campaign=pre_package_cart_mp" target="_blank" rel="noopener" style="background:rgba(244,244,243,.6)">Dream Big kaufen <svg class="arr"><use href="#arrow"/></svg></a>
     <a class="link fade" href="https://swiss.mymonat.com" target="_blank" rel="noopener">Zum MONAT Shop <svg class="arr"><use href="#arrow"/></svg></a>
@@ -718,6 +763,7 @@ a.step:hover,a.prod:hover{background:rgba(168,156,148,.1)}
       <h2>Danke für dein Vertrauen</h2>
       <p>Deine Nachricht an Petra ist vorbereitet. Bitte sende sie in WhatsApp noch ab, damit ich dich eintragen und dir alles Weitere schicken kann.</p>
       <p>Ich freue mich auf dich!</p>
+      <p>Die Aufzeichnung findest du hier. Das Passwort schicke ich dir persönlich: <a href="https://us06web.zoom.us/rec/share/cn5eBXrCcylwK-nVtcPU8rufSeYEh4d9NMBv16IL_poSJqnwcrBDGOu0YX9XSIg._1CNOqpqqKUCgfmV" target="_blank" rel="noopener"><u>Zur Aufzeichnung</u></a></p>
       <div class="linkrow"><a href="#start">Zurück zur Startseite <svg class="arr"><use href="#arrow"/></svg></a><a href="#ratgeber">Kopfhaut-Ratgeber <svg class="arr"><use href="#arrow"/></svg></a><a href="https://instagram.com/petra.safetothrive" target="_blank" rel="noopener">Instagram <svg class="arr"><use href="#arrow"/></svg></a></div>
     </div>
     <div class="dpic" role="img" aria-label="Porträt"></div>
@@ -828,6 +874,7 @@ a.step:hover,a.prod:hover{background:rgba(168,156,148,.1)}
     if(f.contains(t)){f.addEventListener('submit',go)}else{t.addEventListener('click',go);f.addEventListener('submit',go)}
   }
   hook('nform','newsletter-link','Hallo Petra, bitte trag mich in deinen Newsletter ein.');
+  hook('afo','asend','Hallo Petra, bitte schick mir das Passwort für die Business-Aufzeichnung.');
   hook('rform','rsend','Hallo Petra, bitte schick mir den Kopfhaut-Ratgeber.');
 
   /* Rechtliches: Impressum und Datenschutz */
