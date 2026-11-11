@@ -339,6 +339,8 @@ a.step:hover,a.prod:hover{background:rgba(169,132,80,.1)}
 .srow u{grid-column:2;margin-top:12px;font-family:var(--head);font-size:15px;text-decoration:none;border-bottom:1px solid var(--gold);justify-self:start;padding-bottom:2px}
 .srow .arr{position:absolute;right:6px;top:28px;width:20px;height:20px}
 @media(min-width:900px){.sets{padding-left:max(var(--pad),calc((100vw - 1180px)/2 + var(--pad)));padding-right:max(var(--pad),calc((100vw - 1180px)/2 + var(--pad)))}.srows{grid-template-columns:1fr 1fr;gap:0 70px}}
+
+#sparkle{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:45}
 /* Einblenden (alt) */
 
 /* Desktop */
@@ -368,6 +370,7 @@ a.step:hover,a.prod:hover{background:rgba(169,132,80,.1)}
 </style>
 </head>
 <body>
+<canvas id="sparkle" aria-hidden="true"></canvas>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="arrow" viewBox="0 0 20 20"><path d="M4 16 16 4M6 4h10v10" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
@@ -420,7 +423,7 @@ a.step:hover,a.prod:hover{background:rgba(169,132,80,.1)}
   <a class="btn fade" href="https://wa.me/41787189109?text=Hallo%20Petra%2C%20ich%20m%C3%B6chte%20mehr%20%C3%BCber%20das%20Business%20erfahren." target="_blank" rel="noopener">Business-Info-Gespräch <svg class="arr"><use href="#arrow"/></svg></a>
   <div class="linkrow fade"><a href="#ratgeber">Kopfhaut-Ratgeber <svg class="arr"><use href="#arrow"/></svg></a><a href="#haartypen">Haar-Typen <svg class="arr"><use href="#arrow"/></svg></a><a href="#vip2">VIP werden <svg class="arr"><use href="#arrow"/></svg></a><a href="https://swiss.mymonat.com" target="_blank" rel="noopener">Zum MONAT Shop <svg class="arr"><use href="#arrow"/></svg></a></div>
   <div class="two">
-    <p class="fade">Ich begleite Menschen seit 26 Jahren als Praktikerin und Coach. Mit MONAT verbinde ich das, was ich am besten kann, mit einem Business, das zu deinem Leben passt und nicht umgekehrt.</p>
+    <p class="fade">Ich begleite Menschen seit 26 Jahren als Naturheilpraktikerin und Coach. Mit MONAT verbinde ich das, was ich am besten kann, mit einem Business, das zu deinem Leben passt und nicht umgekehrt.</p>
     <p class="fade">Du entdeckst hochwertige Haarpflege für eine gesunde Kopfhaut und kannst dir daraus etwas Eigenes aufbauen, in deinem Tempo und mit einem Team, das dich trägt.</p>
   </div>
 </section>
@@ -436,7 +439,7 @@ a.step:hover,a.prod:hover{background:rgba(169,132,80,.1)}
 <section class="story" id="story">
   <h2 class="fade">Ich wollte nie einfach Produkte verkaufen. Ich wollte Menschen begleiten</h2>
   <div class="cols">
-    <p class="fade">Seit 26 Jahren arbeite ich als Colonhydrotherapeutin und Coach. In dieser Zeit habe ich gelernt: Was man aussen sieht, entscheidet sich meistens innen.</p>
+    <p class="fade">Seit 26 Jahren arbeite ich als Naturheilpraktikerin, Colonhydrotherapeutin und Coach. In dieser Zeit habe ich gelernt: Was man aussen sieht, entscheidet sich meistens innen.</p>
     <p class="fade">Mit MONAT verbinde ich beides. Gute Pflege, die bei der Kopfhaut beginnt, und ein Business, das du so gestaltest, wie es zu deinem Leben passt.</p>
     <p class="fade">So ist GLOW &amp; GROW entstanden. Ein Team für Frauen und Männer, die ihr eigenes Tempo gehen. Ohne Druck und ohne Versprechen auf schnelles Geld.</p>
     <p class="fade">Willkommen bei GLOW &amp; GROW.</p>
@@ -836,6 +839,49 @@ a.step:hover,a.prod:hover{background:rgba(169,132,80,.1)}
   addEventListener('hashchange',showLegal);
   addEventListener('keydown',function(e){if(e.key==='Escape'&&legals.indexOf((location.hash||'').replace('#',''))>-1){location.hash='start'}});
   showLegal();
+
+  /* Glitzersterne beim Scrollen */
+  (function(){
+    var cv=document.getElementById('sparkle');
+    if(!cv||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+    var cx=cv.getContext('2d'),dpr=Math.min(devicePixelRatio||1,2),W=0,H=0,ps=[],run=false,last=scrollY,acc=0;
+    function size(){W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0)}
+    size();addEventListener('resize',size);
+    var cols=[['#fff6dc','#d6bb86'],['#f6e3b0','#b98d43'],['#ffffff','#c9a45c'],['#ffeec2','#a98450']];
+    function star(x,y,r,rot,a,c){
+      cx.save();cx.translate(x,y);cx.rotate(rot);cx.globalAlpha=a;
+      cx.shadowColor=c[1];cx.shadowBlur=r*1.1;
+      var g=cx.createRadialGradient(0,0,0,0,0,r);g.addColorStop(0,c[0]);g.addColorStop(.45,c[0]);g.addColorStop(1,c[1]);
+      cx.fillStyle=g;cx.beginPath();
+      cx.moveTo(0,-r);cx.quadraticCurveTo(r*.09,-r*.09,r,0);cx.quadraticCurveTo(r*.09,r*.09,0,r);
+      cx.quadraticCurveTo(-r*.09,r*.09,-r,0);cx.quadraticCurveTo(-r*.09,-r*.09,0,-r);cx.fill();
+      cx.restore();
+    }
+    function add(dir){
+      if(ps.length>46)return;
+      var big=Math.random()<.22;
+      ps.push({x:Math.random()*W,y:dir>0?H*(.25+Math.random()*.75):H*Math.random()*.75,
+        r:big?(11+Math.random()*7):(4.5+Math.random()*5),rot:Math.random()*.8-.4,vr:(Math.random()-.5)*.02,
+        t:0,life:50+Math.random()*50,vy:-dir*(.15+Math.random()*.35),c:cols[(Math.random()*cols.length)|0]});
+      if(!run){run=true;requestAnimationFrame(tick)}
+    }
+    function tick(){
+      cx.clearRect(0,0,W,H);
+      ps=ps.filter(function(p){
+        p.t++;if(p.t>p.life)return false;
+        var k=p.t/p.life,s=Math.sin(Math.PI*k);s=s*s*(2-s);
+        p.y+=p.vy;p.rot+=p.vr;
+        star(p.x,p.y,p.r*(.35+.65*s),p.rot,Math.min(1,s*1.25),p.c);
+        return true;
+      });
+      if(ps.length){requestAnimationFrame(tick)}else{run=false;cx.clearRect(0,0,W,H)}
+    }
+    addEventListener('scroll',function(){
+      var d=scrollY-last;last=scrollY;if(!d)return;
+      acc+=Math.min(Math.abs(d),90)/26;
+      while(acc>=1){acc-=1;add(d>0?1:-1)}
+    },{passive:true});
+  })();
   var els=document.querySelectorAll('.fade');
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
