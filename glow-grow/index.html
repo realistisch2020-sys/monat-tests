@@ -340,7 +340,12 @@ a.step:hover,a.prod:hover{background:rgba(168,156,148,.1)}
 .srow .arr{position:absolute;right:6px;top:28px;width:20px;height:20px}
 @media(min-width:900px){.sets{padding-left:max(var(--pad),calc((100vw - 1180px)/2 + var(--pad)));padding-right:max(var(--pad),calc((100vw - 1180px)/2 + var(--pad)))}.srows{grid-template-columns:1fr 1fr;gap:0 70px}}
 
-#sparkle{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:45}
+#sparkle{position:fixed;inset:0;pointer-events:none;z-index:45;overflow:hidden}
+.sp{position:absolute;width:var(--s);height:var(--s);margin:calc(var(--s)/-2) 0 0 calc(var(--s)/-2);opacity:0;animation:spk var(--d) ease-in-out forwards}
+.sp b{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.95) 0,rgba(214,222,235,.45) 20%,rgba(190,200,216,0) 68%)}
+.sp u{position:absolute;left:calc(50% - var(--rl));width:calc(var(--rl)*2);top:calc(50% - .6px);height:1.2px;background:linear-gradient(90deg,rgba(236,241,250,0),rgba(250,252,255,.95),rgba(236,241,250,0));text-decoration:none}
+.sp i{position:absolute;top:calc(50% - var(--rv));height:calc(var(--rv)*2);left:calc(50% - .55px);width:1.1px;background:linear-gradient(180deg,rgba(236,241,250,0),rgba(250,252,255,.95),rgba(236,241,250,0))}
+@keyframes spk{0%{opacity:0;transform:translate3d(0,0,0) scale(.4)}50%{opacity:1;transform:translate3d(0,calc(var(--dy)/2),0) scale(1)}100%{opacity:0;transform:translate3d(0,var(--dy),0) scale(.5)}}
 .storypic{aspect-ratio:4/5;width:100%;background:url(img/p4.jpg) 50% 22%/cover}
 .stepsband{height:clamp(190px,42vw,340px);background:url(img/d1.jpg) 50% 40%/cover;margin-bottom:46px}
 .callL{background:linear-gradient(rgba(31,30,29,.8),rgba(31,30,29,.92)),url(img/p2.jpg) 50% 20%/cover}
@@ -386,7 +391,7 @@ a.step:hover,a.prod:hover{background:rgba(168,156,148,.1)}
 </style>
 </head>
 <body>
-<canvas id="sparkle" aria-hidden="true"></canvas>
+<div id="sparkle" aria-hidden="true"></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="arrow" viewBox="0 0 20 20"><path d="M4 16 16 4M6 4h10v10" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
@@ -439,7 +444,7 @@ a.step:hover,a.prod:hover{background:rgba(168,156,148,.1)}
   <a class="btn fade" href="https://wa.me/41787189109?text=Hallo%20Petra%2C%20ich%20m%C3%B6chte%20mehr%20%C3%BCber%20das%20Business%20erfahren." target="_blank" rel="noopener">Business-Info-Gespräch <svg class="arr"><use href="#arrow"/></svg></a>
   <div class="linkrow fade"><a href="#ratgeber">Kopfhaut-Ratgeber <svg class="arr"><use href="#arrow"/></svg></a><a href="#haartypen">Haar-Typen <svg class="arr"><use href="#arrow"/></svg></a><a href="#vip2">VIP werden <svg class="arr"><use href="#arrow"/></svg></a><a href="https://swiss.mymonat.com" target="_blank" rel="noopener">Zum MONAT Shop <svg class="arr"><use href="#arrow"/></svg></a></div>
   <div class="two">
-    <p class="fade">Ich begleite Menschen seit 26 Jahren als Naturheilpraktikerin und Coach. Mit MONAT verbinde ich das, was ich am besten kann, mit einem Business, das zu deinem Leben passt und nicht umgekehrt.</p>
+    <p class="fade">Ich begleite Menschen seit 26 Jahren als Naturheilpraktikerin und Mentorin, heute auch als Autorin. Mit MONAT verbinde ich das, was ich am besten kann, mit einem Business, das zu deinem Leben passt und nicht umgekehrt.</p>
     <p class="fade">Du entdeckst hochwertige Haarpflege für eine gesunde Kopfhaut und kannst dir daraus etwas Eigenes aufbauen, in deinem Tempo und mit einem Team, das dich trägt.</p>
   </div>
 </section>
@@ -456,7 +461,7 @@ a.step:hover,a.prod:hover{background:rgba(168,156,148,.1)}
   <h2 class="fade">Ich wollte nie einfach Produkte verkaufen. Ich wollte Menschen begleiten</h2>
   <div class="storypic fade" role="img" aria-label="Petra Tanner"></div>
   <div class="cols">
-    <p class="fade">Seit 26 Jahren arbeite ich als Naturheilpraktikerin, Colonhydrotherapeutin und Coach, heute auch als Autorin. In dieser Zeit habe ich gelernt: Was man aussen sieht, entscheidet sich meistens innen.</p>
+    <p class="fade">Seit 26 Jahren arbeite ich als Naturheilpraktikerin und Mentorin, heute auch als Autorin. In dieser Zeit habe ich gelernt: Was man aussen sieht, entscheidet sich meistens innen.</p>
     <p class="fade">Mit MONAT verbinde ich beides. Gute Pflege, die bei der Kopfhaut beginnt, und ein Business, das du so gestaltest, wie es zu deinem Leben passt.</p>
     <p class="fade">So ist GLOW &amp; GROW entstanden. Ein Team für Frauen und Männer, die ihr eigenes Tempo gehen. Ohne Druck und ohne Versprechen auf schnelles Geld.</p>
     <p class="fade">Willkommen bei GLOW &amp; GROW.</p>
@@ -606,7 +611,7 @@ a.step:hover,a.prod:hover{background:rgba(168,156,148,.1)}
 <!-- AUFZEICHNUNG -->
 <section class="rec" id="aufzeichnung">
   <div>
-    <a class="vcard fade" href="#afo" aria-label="Aufzeichnung freischalten"><span class="play"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span></a>
+    <a class="vcard fade" href="#afo" aria-label="Aufzeichnung freischalten"></a>
     <div class="vcap fade"><span>Business-Info mit Petra</span><span>Aufzeichnung</span></div>
   </div>
   <div>
@@ -896,50 +901,20 @@ a.step:hover,a.prod:hover{background:rgba(168,156,148,.1)}
   addEventListener('keydown',function(e){if(e.key==='Escape'&&legals.indexOf((location.hash||'').replace('#',''))>-1){location.hash='start'}});
   showLegal();
 
-  /* Glitzer beim Scrollen: weiche Lichtpunkte mit feinen Strahlen */
+  /* Glitzer beim Scrollen: weiche Lichtpunkte mit feinen Strahlen (reine DOM-Elemente, zuverlässig auf dem iPhone) */
   (function(){
-    var cv=document.getElementById('sparkle');
-    if(!cv||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-    var cx=cv.getContext('2d'),dpr=Math.min(devicePixelRatio||1,2),W=0,H=0,ps=[],run=false,last=scrollY,acc=0;
-    function size(){W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0)}
-    size();addEventListener('resize',size);
-    function ray(len,th,a,vert){
-      var g=cx.createLinearGradient(-len,0,len,0);
-      g.addColorStop(0,'rgba(236,241,250,0)');g.addColorStop(.5,'rgba(250,252,255,'+a+')');g.addColorStop(1,'rgba(236,241,250,0)');
-      cx.save();if(vert)cx.rotate(Math.PI/2);cx.fillStyle=g;cx.fillRect(-len,-th/2,len*2,th);cx.restore();
-    }
-    function flare(p,s){
-      var r=p.r*(.4+.6*s),a=Math.min(1,s*1.2);
-      cx.save();cx.translate(p.x,p.y);
-      var h=cx.createRadialGradient(0,0,0,0,0,r*3.2);
-      h.addColorStop(0,'rgba(252,253,255,'+(.9*a)+')');h.addColorStop(.25,'rgba(214,222,235,'+(.45*a)+')');h.addColorStop(1,'rgba(190,200,216,0)');
-      cx.fillStyle=h;cx.beginPath();cx.arc(0,0,r*3.2,0,6.2832);cx.fill();
-      if(p.rays){
-        cx.shadowColor='rgba(140,152,172,.95)';cx.shadowBlur=5;
-        ray(r*(p.rays*.9),1.3,a,false);ray(r*(p.rays*.62),1.1,a,true);
-        cx.shadowBlur=0;
-      }
-      var c=cx.createRadialGradient(0,0,0,0,0,r*.55);
-      c.addColorStop(0,'rgba(255,255,255,'+a+')');c.addColorStop(1,'rgba(245,248,255,0)');
-      cx.fillStyle=c;cx.beginPath();cx.arc(0,0,r*.55,0,6.2832);cx.fill();
-      cx.restore();
-    }
+    var box=document.getElementById('sparkle');
+    if(!box||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+    var last=scrollY,acc=0,n=0;
     function add(dir){
-      if(ps.length>9)return;
-      var big=Math.random()<.3;
-      ps.push({x:Math.random()*W,y:dir>0?H*(.2+Math.random()*.8):H*Math.random()*.8,
-        r:big?(7+Math.random()*5):(2.5+Math.random()*3),rays:big?(9+Math.random()*6):0,
-        t:0,life:55+Math.random()*60,vy:-dir*(.1+Math.random()*.3)});
-      if(!run){run=true;requestAnimationFrame(tick)}
-    }
-    function tick(){
-      cx.clearRect(0,0,W,H);
-      ps=ps.filter(function(p){
-        p.t++;if(p.t>p.life)return false;
-        var k=p.t/p.life,s=Math.sin(Math.PI*k);s=s*s*(2-s);
-        p.y+=p.vy;flare(p,s);return true;
-      });
-      if(ps.length){requestAnimationFrame(tick)}else{run=false;cx.clearRect(0,0,W,H)}
+      if(n>=9)return;
+      var big=Math.random()<.3,r=big?(7+Math.random()*5):(2.5+Math.random()*3),rays=big?(9+Math.random()*6):0;
+      var W=innerWidth,H=innerHeight,life=55+Math.random()*60,vy=-dir*(.1+Math.random()*.3);
+      var e=document.createElement('div');e.className='sp';
+      e.style.cssText='left:'+(Math.random()*W)+'px;top:'+(dir>0?H*(.2+Math.random()*.8):H*Math.random()*.8)+'px;--s:'+(r*6.4)+'px;--d:'+(life/60)+'s;--dy:'+(vy*life)+'px;--rl:'+(r*rays*.9)+'px;--rv:'+(r*rays*.62)+'px';
+      e.innerHTML='<b></b>'+(rays?'<u></u><i></i>':'');
+      n++;e.addEventListener('animationend',function(){n--;e.remove()});
+      box.appendChild(e);
     }
     addEventListener('scroll',function(){
       var d=scrollY-last;last=scrollY;if(!d)return;
