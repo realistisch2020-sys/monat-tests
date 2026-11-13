@@ -388,6 +388,24 @@ a.step:hover,a.prod:hover{background:rgba(168,156,148,.1)}
 .rec small{display:block;margin-top:18px;opacity:.7}
 @media(min-width:900px){.rec{padding-left:max(var(--pad),calc((100vw - 1180px)/2 + var(--pad)));padding-right:max(var(--pad),calc((100vw - 1180px)/2 + var(--pad)));display:grid;grid-template-columns:1fr 1fr;gap:0 70px;align-items:start}.rec .adv{grid-column:1/-1}}
 .paketpic{display:block;width:100%;max-width:880px;height:auto;margin:6px 0 34px;border:1px solid var(--gold-l);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.pkgs{display:grid;gap:18px;margin:8px 0 36px;max-width:980px}
+.pkg{display:grid;gap:6px;padding:34px 30px 30px;background:linear-gradient(160deg,#f7f6f5,#ebe8e6);border:1px solid var(--gold-l);box-shadow:0 14px 40px rgba(43,41,40,.07);position:relative;transition:transform .35s,box-shadow .35s}
+.pkg:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(43,41,40,.12)}
+.pkg::before{content:"";position:absolute;inset:8px;border:1px solid rgba(168,156,148,.35);pointer-events:none}
+.pkg .pno{font-family:var(--head);font-size:13px;letter-spacing:.14em;color:var(--gold-d)}
+.pkg h3{font-family:var(--head);font-size:13px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;margin:6px 0 14px}
+.pkg .pprice{font-family:'Cormorant Garamond',serif;font-size:clamp(54px,9vw,78px);line-height:1;font-weight:500;letter-spacing:-.01em}
+.pkg .pold{font-size:15px;text-decoration:line-through;color:var(--gold-d);margin-top:6px}
+.pkg .ppill{justify-self:start;margin:16px 0 4px;padding:7px 16px;border:1px solid var(--gold-d);font-family:var(--head);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+.pkg .psave{font-size:15px;opacity:.85}
+.pkg .pcta{display:flex;align-items:center;gap:10px;margin-top:22px;padding-top:18px;border-top:1px solid rgba(168,156,148,.45);font-family:var(--head);font-size:15px}
+.pkg .pcta .arr{width:18px;height:18px}
+.pkg.dk{background:linear-gradient(160deg,#2b2928,#1f1e1d);color:#f4f4f3;border-color:#2b2928}
+.pkg.dk::before{border-color:rgba(207,198,191,.35)}
+.pkg.dk .pno,.pkg.dk .pold{color:var(--gold-l)}
+.pkg.dk .ppill{border-color:var(--gold-l)}
+.pkg.dk .pcta{border-top-color:rgba(207,198,191,.35)}
+@media(min-width:760px){.pkgs{grid-template-columns:1fr 1fr;gap:26px}}
 </style>
 </head>
 <body>
@@ -560,7 +578,26 @@ a.step:hover,a.prod:hover{background:rgba(168,156,148,.1)}
   <p class="fade" style="margin-bottom:22px;opacity:.85">Baue ein Business, das du wirklich liebst.</p>
   <div class="price fade">Dein Einstieg für CHF 700.–</div>
   <p class="big fade">Das grosse Paket gibt dir die volle Produktauswahl, echte eigene Erfahrung und den besten Start in dein Business.</p>
-  <img class="paketpic fade" src="img/pakete.jpg" width="1284" height="572" alt="Die beiden Starter-Pakete im Vergleich: Custom Combo CHF 260 und Dream Big Schweiz CHF 700" loading="lazy">
+  <div class="pkgs">
+    <a class="pkg  fade" href="https://mymonat.com/enrollments/16024648-1789969177/share?utm_source=website&amp;utm_medium=link&amp;utm_campaign=pre_package_cart_mp" target="_blank" rel="noopener">
+      <span class="pno">(01)</span>
+      <h3>Custom Hair Essentials</h3>
+      <div class="pprice">CHF 260.–</div>
+      <div class="pold">statt CHF 552</div>
+      <div class="ppill">53 % Rabatt</div>
+      <div class="psave">Du sparst CHF 292</div>
+      <span class="pcta">Kleines Paket ansehen <svg class="arr"><use href="#arrow"/></svg></span>
+    </a>
+    <a class="pkg dk fade" href="https://mymonat.com/enrollments/16024648-1789969092/share?utm_source=website&amp;utm_medium=link&amp;utm_campaign=pre_package_cart_mp" target="_blank" rel="noopener">
+      <span class="pno">(02)</span>
+      <h3>Dream Big Schweiz</h3>
+      <div class="pprice">CHF 700.–</div>
+      <div class="pold">statt CHF 1’850</div>
+      <div class="ppill">62 % Rabatt</div>
+      <div class="psave">Du sparst CHF 1’150</div>
+      <span class="pcta">Dream Big ansehen <svg class="arr"><use href="#arrow"/></svg></span>
+    </a>
+  </div>
   <a class="btn fade" href="https://mymonat.com/enrollments/16024648-1789969092/share?utm_source=website&amp;utm_medium=link&amp;utm_campaign=pre_package_cart_mp" target="_blank" rel="noopener">Jetzt Dream Big sichern <svg class="arr"><use href="#arrow"/></svg></a>
 </section>
 
